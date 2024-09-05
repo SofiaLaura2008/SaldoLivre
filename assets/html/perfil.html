@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Saldo Livre - Perfil</title>
+        <link rel="stylesheet" href="../css/login.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="../js/scripts.js" defer></script>
+        <style>
+            a{
+                text-decoration: none;
+                color: black;
+            }
+
+            a:hover{
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../img/slLogo.png" alt="Saldo Livre" class="logo">
+                </div>
+                <div class="icons">
+                    <a href="../../index.html">
+                        <i class="fas fa-house"></i>
+                    </a>
+                    <i class="fas fa-envelope"></i>
+                    <i class="fa-solid fa-list" id="lista" onclick="Menulista()"></i>
+                    <i class="fas fa-user-circle" id="profile-icon" onclick="Menu()"></i>
+                </div>
+                <div class="lista" id="listas">
+                    <a href="dicasEconomizar.html"><p>Dicas para Economizar</p></a>
+                    <a href="organizacao.html"><p>Planilha para Organização de Despesas</p></a>
+                    <a href="metas.html"><p>Metas Financeiras</p></a>
+                    <a href="planejamento.html"><p>Planejamento Financeiro</p></a>
+                    <a href="agenda.html"><p>Agenda de pagamentos</p></a>
+                    <a href="artigos.html"><p>Artigos e Recursos</p></a>
+                </div>
+
+                <div class="profile-box" id="profile-box">
+                    <a href="login.html"><p>Entrar/Cadastre-se</p></a>
+                    <a href="perfil.html"><p>Perfil</p></a>
+                    <a onclick="sair()"><p>Sair</p></a>
+                </div>
+            </div>
+        </header>
+        
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <main style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 80vh;">
+            <h1><div id="welcome-message"></div></h1>
+            <br>
+            <div class="perfil" style="text-align: center;">
+                <p id="cadastro-nome">Nome: <span id="nome"></span></p>
+                <p id="cadastro-email">Email: <span id="email"></span></p>
+                <a href="atualizar.html">Atualizar Informações</button>
+            </div>
+        </main>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const entrou = localStorage.getItem('Entrou');
+                const logado = localStorage.getItem('logado'); 
+                
+                if (entrou === 'true' && logado) {
+                    const novosDados = JSON.parse(localStorage.getItem(logado));
+
+                    if (novosDados) {
+                        document.getElementById('welcome-message').textContent = `Bem-vindo, ${novosDados.nome}`;
+                        document.getElementById('nome').textContent = novosDados.nome; 
+                        document.getElementById('email').textContent = logado;       
+                    } else {
+                        console.error('Usuário não encontrado no localStorage.');
+                        window.location.href = "../html/login.html"; 
+                    }
+                } else {
+                    window.location.href = "../html/login.html"; 
+                }
+            });
+        </script>
+    </body>
+</html>

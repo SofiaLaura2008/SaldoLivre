@@ -1,0 +1,225 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4cf;
+    overflow-x: hidden;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #051d40;
+    color: white;
+    height: 80px;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+header .header-content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    height: 80px;
+    align-items: center;
+}
+
+header img.logo {
+    height: 150px; 
+    width: auto; 
+}
+
+header .icons {
+    display: flex;
+    font-size: 1.5rem;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.icons {
+    display: flex;
+    font-size: 1.5rem;
+    align-items: center;
+}
+
+.icons a{
+    text-decoration-line: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.icons i {
+    margin-left: 1rem;
+    cursor: pointer;
+    margin: 1rem;
+}
+
+.profile-box {
+    display: none; 
+    position: absolute;
+    right: 10px;
+    top: 80px;
+    background-color: #051d40;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    margin-right: 5vw;
+}
+
+.profile-box p {
+    margin: 0;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #f4f4f4;
+}
+
+.profile-box p:hover {
+    background-color: #9d9d9d;
+}
+
+.lista {
+    display: none; 
+    position: absolute;
+    right: 10px;
+    top: 80px;
+    background-color: #051d40;
+    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    margin-right: 5vw;
+}
+
+.lista p {
+    margin: 0;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #f4f4f4;
+}
+
+.lista p:hover {
+    background-color: #9d9d9d;
+}
+
+.progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: #051d40;
+    transition: width 0.2s ease;
+}
+
+h1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+h2{
+    size: 1rem;
+}
+
+p{
+    font-size: 25px;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.formLogin {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30%;
+    margin-top: 5%;
+    width: 30%;
+    background-color: #fff;
+    border-radius: 7px;
+    padding: 40px;
+    box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.4);
+    gap: 10px;
+}
+
+.formLogin h1 {
+    padding: 0;
+    margin: 0;
+    font-weight: 500;
+    font-size: 2.3em;
+}
+
+.formLogin p {
+    display: inline-block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.formLogin input {
+    padding: 15px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    margin-top: 5px;
+    border-radius: 4px;
+    transition: all linear 160ms;
+    outline: none;
+}
+
+
+.formLogin input:focus {
+    border: 1px solid #051d40;
+}
+
+.formLogin label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.formLogin a {
+    display: inline-block;
+    text-decoration: none;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #555;
+    transition: all linear 160ms;
+}
+
+.formLogin a:hover {
+    color: #051d40;
+    text-decoration: underline;
+}
+
+.btn {
+    background-color: #051d40;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border: none !important;
+    transition: all linear 160ms;
+    cursor: pointer;
+    margin: 0 !important;
+
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    background-color: #051d40;
+    opacity: 92%;
+
+}

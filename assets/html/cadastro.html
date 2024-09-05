@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Saldo Livre - Cadastro</title>
+        <link rel="stylesheet" href="../css/cadstro.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="../js/scripts.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../img/SL_logo.png" alt="Saldo Livre" class="logo">
+                </div>
+                <div class="icons">
+                    <a href="../../index.html">
+                        <i class="fas fa-house"></i>
+                    </a>
+                    <i class="fas fa-envelope"></i>
+                    <i class="fa-solid fa-list" id="lista" onclick="Menulista()"></i>
+                    <i class="fas fa-user-circle" id="profile-icon" onclick="Menu()"></i>
+                </div>
+                <div class="lista" id="listas">
+                    <a href="dicasEconomizar.html"><p>Dicas para Economizar</p></a>
+                    <a href="organizacao.html"><p>Planilha para Organização de Despesas</p></a>
+                    <a href="metas.html"><p>Metas Financeiras</p></a>
+                    <a href="planejamento.html"><p>Planejamento Financeiro</p></a>
+                    <a href="agenda.html"><p>Agenda de pagamentos</p></a>
+                </div>
+
+                <div class="profile-box" id="profile-box">
+                    <a href="login.html"><p>Entrar/Cadastre-se</p></a>
+                    <a href="perfil.html"><p>Perfil</p></a>
+                    <a onclick="sair()"><p>Sair</p></a>
+                </div>
+            </div>
+        </header>
+
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <main>
+            <div class="form-container">
+                <h1>Cadastro</h1>
+                <p>Preencha os dados para se cadastrar.</p>
+                <label for="cadastro-nome">Nome:</label>
+                <input type="text" id="cadastro-nome" placeholder="Digite seu nome de usuário" required>
+
+                <label for="cadastro-email">Email:</label>
+                <input type="text" id="cadastro-email" placeholder="Digite seu email" required>
+                
+                <label for="cadastro-senha">Senha</label>
+                <input type="password" id="cadastro-senha" placeholder="Digite sua senha" required>
+                
+                <label for="cadastro-confirm-senha">Confirme a Senha</label>
+                <input type="password" id="cadastro-confirm-senha" placeholder="Confirme sua senha" required>
+                <button type="button" onclick="cadastro()">Cadastrar</button>
+                <p>Já tem uma conta? <a href="login.html" onclick="Login()">Faça login</a></p>
+            </div>
+        </main>
+        <script>
+            // Formulário de cadastro
+            function Cadastro() {
+                document.getElementById('login-form').style.display = 'none';
+                document.getElementById('cadastro-form').style.display = 'block';
+            }
+
+            //cadastro
+            function cadastro() {
+                const nome = document.getElementById('cadastro-nome').value;
+                const email = document.getElementById('cadastro-email').value;
+                const senha = document.getElementById('cadastro-senha').value;
+                const confirmsenha = document.getElementById('cadastro-confirm-senha').value;
+
+                if (!nome || !email || !senha || !confirmsenha) {
+                    alert('Por favor, preencha todos os campos.');
+                    return;
+                }
+
+                if (senha !== confirmsenha) {
+                    alert('As senhas não coincidem.');
+                    return;
+                }
+
+                if (localStorage.getItem(email)) {
+                    alert('Email já está sendo usado.');
+                } else {
+                    localStorage.setItem(email, JSON.stringify({ nome, senha }));
+                    alert('Usuário registrado com sucesso!');
+
+                    document.getElementById('cadastro-nome').value = '';
+                    document.getElementById('cadastro-email').value = '';
+                    document.getElementById('cadastro-senha').value = '';
+                    document.getElementById('cadastro-confirm-senha').value = '';
+
+                    alert('Faça login agora.');
+                    window.location.href = "../html/login.html";
+                }
+            }
+        </script>
+    </body>
+</html>

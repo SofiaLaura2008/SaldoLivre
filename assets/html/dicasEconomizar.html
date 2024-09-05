@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Saldo Livre - Economizar</title>
+        <link rel="stylesheet" href="../css/styles_inicial.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="../js/scripts.js" defer></script>
+        <style>
+            iframe{
+                margin-left: 40px;
+                margin-right: 10px;
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../img/slLogo.png" alt="Saldo Livre" class="logo">
+                </div>
+                <div class="icons">
+                    <a href="../../index.html">
+                        <i class="fas fa-house"></i>
+                    </a>
+                    <i class="fa-solid fa-list" id="lista" onclick="Menulista()"></i>
+                    <i class="fas fa-user-circle" id="profile-icon" onclick="Menu()"></i>
+                </div>
+                <div class="lista" id="listas">
+                    <a href="dicasEconomizar.html"><p>Dicas para Economizar</p></a>
+                    <a href="organizacao.html"><p>Planilha para Organização de Despesas</p></a>
+                    <a href="metas.html"><p>Metas Financeiras</p></a>
+                    <a href="orçamento.html"><p>Orçamento Pessoal</p></a>
+                    <a href="planejamento.html"><p>Planejamento Financeiro</p></a>
+                    <a href="agenda.html"><p>Agenda de pagamentos</p></a>
+                </div>
+
+                <div class="profile-box" id="profile-box">
+                    <a href="login.html"><p>Entrar/Cadastre-se</p></a>
+                    <a href="perfil.html"><p>Perfil</p></a>
+                    <a onclick="sair()"><p>Sair</p></a>
+                </div>
+            </div>
+        </header>
+        
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <main>
+            <h1>Como posso começar a economizar?</h1>
+            <h3>Você pode começar a economizar com estratégias inteligentes e um planejamento bem elaborado, junto com algumas das dicas/sugestões que estão aqui:</h3>
+            <ul>
+                <li><h2>Crie um orçamento</h2> <p> Crie um orçamento mensal/semanal, você que sabe, para que você consiga acompanhar suas despesas. Isso vai-lhe ajudar a identificar onde você pode cortar gastos.</p></li>
+                <li><h2>Corte gastos desnecessários</h2><p>Evite comprar roupas caras, os pedidos por delivery, assinaturas de serviços não utilizados, tente controlar as compras impulsivas em lojas online e jantares frequentes em restaurantes.</p></li>
+                <li><h2>Compare Preços</h2> <p>Pesquise e Compare preços em diferentes lojas físicas e online, aproveitando promoções e descontos. Use aplicativos e sites de comparação para encontrar as melhores ofertas.</p></li>
+                <li><h2>Pague dívidas</h2> <p>Pagamento as dívidas com altas taxas de juros. Se possível, tente renegociar suas dívidas.</p></li>
+            </ul>
+
+            <h3>Aqui está alguns vídeos que podem lhe ajudar</h3>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/VVKKjfg4VY0?si=P0AAgwGxqpmW2_zS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/1c52pc-fUjo?si=vPYPUVGsVBING0Ni" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/KVdKT5C5f04?si=oAZhkaivcp-FClG9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/dSLhykOui3Y?si=ivuEvvF6zt6cWsJa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </main>
+    </body>
+</html>

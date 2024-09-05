@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Saldo Livre - Organização</title>
+        <link rel="stylesheet" href="../css/styles_agenda.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="../js/scripts.js" defer></script>
+        <style>
+            table {
+                width: 60%;
+                border-collapse: collapse;
+                margin-left: 20%;
+            }
+            th, td {
+                border: 2px solid #051d40;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #9d9d9d;
+            }
+
+            td{
+                background-color: #c7c6c6;
+            }
+
+            form{
+                margin-left: 18%;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../img/slLogo.png" alt="Saldo Livre" class="logo">
+                </div>
+                <div class="icons">
+                    <a href="../../index.html">
+                        <i class="fas fa-house"></i>
+                    </a>
+                    <i class="fa-solid fa-list" id="lista" onclick="Menulista()"></i>
+                    <i class="fas fa-user-circle" id="profile-icon" onclick="Menu()"></i>
+                </div>
+                <div class="lista" id="listas">
+                    <a href="dicasEconomizar.html"><p>Dicas para Economizar</p></a>
+                    <a href="organizacao.html"><p>Planilha para Organização de Despesas</p></a>
+                    <a href="metas.html"><p>Metas Financeiras</p></a>
+                    <a href="planejamento.html"><p>Planejamento Financeiro</p></a>
+                    <a href="agenda.html"><p>Agenda de pagamentos</p></a>
+                    <a href="artigos.html"><p>Artigos e Recursos</p></a>
+                </div>
+
+                <div class="profile-box" id="profile-box">
+                    <a href="login.html"><p>Entrar/Cadastre-se</p></a>
+                    <a href="perfil.html"><p>Perfil</p></a>
+                    <a onclick="sair()"><p>Sair</p></a>
+                </div>
+            </div>
+        </header>
+        
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <main>
+            <h1 style="text-align: center;">Planilha de Organização de Despesas</h1>
+            <form id="despesas">
+                <label for="data">Data:</label>
+                <input type="date" id="data" required>
+                
+                <label for="descricao">Descrição da Despesa:</label>
+                <input type="text" id="descricao" required>
+                
+                <label for="categoria">Categoria:</label>
+                <select id="categoria" required>
+                    <option>Alimentação</option>
+                    <option>Transporte</option>
+                    <option>Saúde</option>
+                    <option>Educação</option>
+                </select>
+                
+                <label for="valor">Valor:</label>
+                <input type="number" id="valor" step="0.01" required>
+                
+                <label for="pagamento">Método de Pagamento:</label>
+                <select id="pagamento" required>
+                    <option>Dinheiro</option>
+                    <option>Cartão de Crédito</option>
+                    <option>Cartão de Débito</option>
+                </select>
+                
+                <button type="submit">Adicionar Despesa</button>
+            </form>
+            <br>
+            <br>
+            <table id="tabela">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Descrição da Despesa</th>
+                        <th>Categoria</th>
+                        <th>Valor</th>
+                        <th>Método de Pagamento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </main>
+        <script>
+            // Planilha de despesas
+            document.addEventListener('DOMContentLoaded', function() {
+                const despesasForm = document.getElementById('despesas');
+                const tabela = document.getElementById('tabela') ? document.getElementById('tabela').getElementsByTagName('tbody')[0] : null;
+
+                if (tabela) {
+                    const despesas = JSON.parse(localStorage.getItem('despesas')) || [];
+                    despesas.forEach(despesa => despesasTabela(despesa));
+
+                    despesasForm.addEventListener('submit', function(event) {
+                        event.preventDefault(); 
+
+                        const data = document.getElementById('data').value;
+                        const descricao = document.getElementById('descricao').value;
+                        const categoria = document.getElementById('categoria').value;
+                        const valor = document.getElementById('valor').value;
+                        const pagamento = document.getElementById('pagamento').value;
+
+                        const novaDespesa = { data, descricao, categoria, valor: parseFloat(valor).toFixed(2), pagamento };
+
+                        despesasTabela(novaDespesa);
+                        despesas.push(novaDespesa);
+                        localStorage.setItem('despesas', JSON.stringify(despesas));
+                        despesasForm.reset();
+                    });
+
+                    function despesasTabela(despesa) {
+                        const newRow = tabela.insertRow();
+                        newRow.innerHTML = `
+                            <td>${despesa.data}</td>
+                            <td>${despesa.descricao}</td>
+                            <td>${despesa.categoria}</td>
+                            <td>${despesa.valor}</td>
+                            <td>${despesa.pagamento}</td>
+                        `;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

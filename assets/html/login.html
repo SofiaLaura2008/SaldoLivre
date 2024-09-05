@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Saldo Livre - login</title>
+        <link rel="stylesheet" href="../css/login.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="../js/scripts.js" defer></script>
+    </head>
+    <body>
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../img/slLogo.png" alt="Saldo Livre" class="logo">
+                </div>
+                <div class="icons">
+                    <a href="../../index.html">
+                        <i class="fas fa-house"></i>
+                    </a>
+                    <i class="fa-solid fa-list" id="lista" onclick="Menulista()"></i>
+                    <i class="fas fa-user-circle" id="profile-icon" onclick="Menu()"></i>
+                </div>
+                <div class="lista" id="listas">
+                    <a href="dicasEconomizar.html"><p>Dicas para Economizar</p></a>
+                    <a href="organizacao.html"><p>Planilha para Organização de Despesas</p></a>
+                    <a href="metas.html"><p>Metas Financeiras</p></a>
+                    <a href="planejamento.html"><p>Planejamento Financeiro</p></a>
+                    <a href="agenda.html"><p>Agenda de pagamentos</p></a>
+                </div>
+
+                <div class="profile-box" id="profile-box">
+                    <a href="login.html"><p>Entrar/Cadastre-se</p></a>
+                    <a href="perfil.html"><p>Perfil</p></a>
+                    <a onclick="sair()"><p>Sair</p></a>
+                </div>
+            </div>
+        </header>
+
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <main>
+            <div class="formLogin">
+                <form method="POST" class="Login" id="login-form" onsubmit="login(event)">
+                    <h1>Login</h1>
+                    <p>Digite os seus dados de acesso no campo abaixo.</p>
+                    <br>
+                    <label for="login-email">E-mail</label>
+                    <br>
+                    <input type="email" id="login-email" placeholder="Digite seu e-mail" autofocus="true" required/>
+                    <br>
+                    <label for="login-senha">Senha</label>
+                    <br>
+                    <input type="password" id="login-senha" placeholder="Digite a sua Senha" required/>
+                    <br>
+                    <p>Não tem cadastro?<a href="cadastro.html" onclick="Cadastro">Cadastre-se</a></p>
+                    <br>
+                    <button type="submit">Entrar</button>
+                </form>
+            </div>
+        </main>
+
+        <script>
+                    
+        // Formulário de login
+        function Login() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('cadastro-form').style.display = 'none';
+        }
+
+        function login(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('login-email').value;
+            const senha = document.getElementById('login-senha').value;
+
+            const usuário = JSON.parse(localStorage.getItem(email));
+
+            // Verifica se o usuário existe e se a senha corresponde
+            if (usuário && usuário.senha === senha) {
+                localStorage.setItem('Entrou', 'true'); 
+                localStorage.setItem('logado', email);
+
+                document.getElementById('login-form').style.display = 'none';
+                alert('Você entrou!');
+                window.location.href = "../../index.html"; 
+            } else {
+                alert('Usuário ou senha incorretos ou você precisa se cadastrar.');
+            }
+        }
+
+        </script>
+    </body>
+</html>

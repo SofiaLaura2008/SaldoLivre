@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Saldo Livre - Agenda</title>
+        <link rel="stylesheet" href="../css/styles_agenda.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="../js/scripts.js" defer></script>
+        <style>
+            table {
+                width: 60%;
+                border-collapse: collapse;
+                margin-left: 20%;
+            }
+            th, td {
+                border: 2px solid #051d40;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #9d9d9d;
+            }
+
+            td{
+                background-color: #c7c6c6;
+            }
+
+            form{
+                margin-left: 18%;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../img/slLogo.png" alt="Saldo Livre" class="logo">
+                </div>
+                <div class="icons">
+                    <a href="../../index.html">
+                        <i class="fas fa-house"></i>
+                    </a>
+                    <i class="fas fa-envelope"></i>
+                    <i class="fa-solid fa-list" id="lista" onclick="Menulista()"></i>
+                    <i class="fas fa-user-circle" id="profile-icon" onclick="Menu()"></i>
+                </div>
+                <div class="lista" id="listas">
+                    <a href="dicasEconomizar.html"><p>Dicas para Economizar</p></a>
+                    <a href="organizacao.html"><p>Planilha para Organização de Despesas</p></a>
+                    <a href="metas.html"><p>Metas Financeiras</p></a>
+                    <a href="planejamento.html"><p>Planejamento Financeiro</p></a>
+                    <a href="agenda.html"><p>Agenda de pagamentos</p></a>
+                </div>
+
+                <div class="profile-box" id="profile-box">
+                    <a href="login.html"><p>Entrar/Cadastre-se</p></a>
+                    <a href="perfil.html"><p>Perfil</p></a>
+                    <a onclick="sair()"><p>Sair</p></a>
+                </div>
+            </div>
+        </header>
+        
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <main>
+            <h1 class="text">Agenda de Pagamentos</h1>
+            <p class="text">Adicione seus pagamentos e receba lembretes.</p>
+            
+            <h2 class="text"> → Adicionar Pagamento</h2>
+            <form id="formPagamento">
+                <label for="descricao">Descrição:</label>
+                <input type="text" id="descricao" required>
+                
+                <label for="valor">Valor:</label>
+                <input type="number" id="valor" step="0.01" required>
+                
+                <label for="dataVencimento">Data de Vencimento:</label>
+                <input type="date" id="dataVencimento" required>
+                
+                <button type="submit">Adicionar Pagamento</button>
+            </form>
+            
+            <h2 class="text"> → Pagamentos Pendentes</h2>
+
+            <table id="tabelaPagamentos">
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Data de Vencimento</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </main>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const formPagamento = document.getElementById('formPagamento');
+                const tabelaPagamentos = document.getElementById('tabelaPagamentos').getElementsByTagName('tbody')[0];
+
+                const pagamentos = JSON.parse(localStorage.getItem('pagamentos')) || [];
+                pagamentos.forEach(pagamento => adicionarLinhaTabela(pagamento));
+
+                formPagamento.addEventListener('submit', function(event) {
+                    event.preventDefault(); 
+
+                    const descricao = document.getElementById('descricao').value;
+                    const valor = parseFloat(document.getElementById('valor').value);
+                    const dataVencimento = document.getElementById('dataVencimento').value;
+
+                    const novoPagamento = { descricao, valor: valor.toFixed(2), dataVencimento };
+
+                    adicionarLinhaTabela(novoPagamento);
+
+                    pagamentos.push(novoPagamento);
+                    localStorage.setItem('pagamentos', JSON.stringify(pagamentos));
+
+                    formPagamento.reset();
+                });
+
+                function adicionarLinhaTabela(pagamento) {
+                    const novaLinha = tabelaPagamentos.insertRow();
+                    novaLinha.innerHTML = `
+                        <td>${pagamento.descricao}</td>
+                        <td>R$ ${pagamento.valor}</td>
+                        <td>${pagamento.dataVencimento}</td>`;
+                }
+            });
+        </script>
+    </body>
+</html>

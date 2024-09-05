@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Saldo Livre - Atualizar</title>
+        <link rel="stylesheet" href="../css/styles_inicial.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="../js/scripts.js" defer></script>
+        <style>
+            .atualizar {
+                display: flex;
+                flex-direction: column; /* Organiza os elementos em uma coluna */
+                justify-content: center; /* Centraliza verticalmente */
+                align-items: center; /* Centraliza horizontalmente */
+                text-align: center; /* Centraliza o texto dentro dos elementos */
+                margin: 0 auto; /* Centraliza a div no corpo da página */
+                height: 80vh; /* Ajuste para centralizar verticalmente, ocupa 80% da altura da tela */
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../img/slLogo.png" alt="Saldo Livre" class="logo">
+                </div>
+                <div class="icons">
+                    <a href="../../index.html">
+                        <i class="fas fa-house"></i>
+                    </a>
+                    <i class="fas fa-envelope"></i>
+                    <i class="fa-solid fa-list" id="lista" onclick="Menulista()"></i>
+                    <i class="fas fa-user-circle" id="profile-icon" onclick="Menu()"></i>
+                </div>
+                <div class="lista" id="listas">
+                    <a href="dicasEconomizar.html"><p>Dicas para Economizar</p></a>
+                    <a href="organizacao.html"><p>Planilha para Organização de Despesas</p></a>
+                    <a href="metas.html"><p>Metas Financeiras</p></a>
+                    <a href="planejamento.html"><p>Planejamento Financeiro</p></a>
+                    <a href="agenda.html"><p>Agenda de pagamentos</p></a>
+                </div>
+
+                <div class="profile-box" id="profile-box">
+                    <a href="login.html"><p>Entrar/Cadastre-se</p></a>
+                    <a href="perfil.html"><p>Perfil</p></a>
+                    <a onclick="sair()"><p>Sair</p></a>
+                </div>
+            </div>
+        </header>
+        
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <main>
+            <div class="atualizar">
+                <h2>Modificar Informações</h2>
+                <label for="edit-name">Novo nome:</label>
+                <input type="text" id="edit-name" placeholder="Novo Nome">
+            
+                <br>
+                <label for="edit-email">Novo email:</label>
+                <input type="email" id="edit-email" placeholder="Novo Email">
+            
+                <br>
+                <label for="edit-senha">Nova senha:</label>
+                <input type="password" id="edit-senha" placeholder="Nova Senha">
+                
+                <br>
+                <br>
+                <button onclick="atualizar()">Salvar</button>
+            </div>
+        </main>
+        <script>
+            //atualizar informações
+            function atualizar() {
+                const novoNome = document.getElementById('edit-name').value.trim();
+                const novoEmail = document.getElementById('edit-email').value.trim();
+                const novaSenha = document.getElementById('edit-senha').value.trim();
+
+                if (!novoNome || !novoEmail || !novaSenha) {
+                    alert('Por favor, preencha todos os campos.');
+                    return;
+                }
+
+                const userData = JSON.parse(localStorage.getItem(localStorage.getItem('logado')));
+                if (userData) {
+                    userData.nome = novoNome; 
+                    userData.email = novoEmail; 
+                    userData.senha = novaSenha; 
+
+                    localStorage.setItem(localStorage.getItem('logado'), JSON.stringify(userData));
+                    
+                    alert('Informações atualizadas com sucesso!');
+                    window.location.href = "perfil.html";
+
+                    document.getElementById('name').textContent = novoNome;
+                    document.getElementById('email').textContent = novoEmail;
+                } else {
+                    alert('Usuário não encontrado.');
+                }
+            }
+        </script>
+    </body>
+</html>

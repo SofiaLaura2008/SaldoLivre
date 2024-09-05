@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Saldo Livre - Planejamento</title>
+        <link rel="stylesheet" href="../css/styles_agenda.css">
+        <script src="../js/scripts.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <style>
+            table {
+                width: 60%;
+                border-collapse: collapse;
+                margin-left: 6%;
+                margin-bottom: 40px;
+            }
+            th, td {
+                border: 2px solid #051d40;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background-color: #9d9d9d;
+            }
+
+            td{
+                background-color: #c7c6c6;
+            }
+
+            form{
+                margin-left: 18%;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../img/slLogo.png" alt="Saldo Livre" class="logo">
+                </div>
+                <div class="icons">
+                    <a href="../../index.html">
+                        <i class="fas fa-house"></i>
+                    </a>
+                    <i class="fa-solid fa-list" id="lista" onclick="Menulista()"></i>
+                    <i class="fas fa-user-circle" id="profile-icon" onclick="Menu()"></i>
+                </div>
+                <div class="lista" id="listas">
+                    <a href="dicasEconomizar.html"><p>Dicas para Economizar</p></a>
+                    <a href="organizacao.html"><p>Planilha para Organização de Despesas</p></a>
+                    <a href="metas.html"><p>Metas Financeiras</p></a>
+                    <a href="planejamento.html"><p>Planejamento Financeiro</p></a>
+                    <a href="agenda.html"><p>Agenda de pagamentos</p></a>
+                </div>
+
+                <div class="profile-box" id="profile-box">
+                    <a href="login.html"><p>Entrar/Cadastre-se</p></a>
+                    <a href="perfil.html"><p>Perfil</p></a>
+                    <a onclick="sair()"><p>Sair</p></a>
+                </div>
+            </div>
+        </header>
+        
+        <div class="progress-container">
+            <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <main style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 80vh;">
+            <h1>Calcule o quanto você precisa juntar para conseguir alcançar as suas metas</h1>
+            <h2>Calculadora de Poupança</h2>
+            <label for="valorObjetivo">Valor Objetivo:</label>
+            <input type="number" id="valorObjetivo" step="0.01" required>
+
+            <label for="prazo">Prazo (em meses):</label>
+            <input type="number" id="prazo" required>
+
+            <button id="calcularPoupanca">Calcular</button>
+            <p id="resultado"></p>
+
+            <h2>Tabela de Poupança</h2>
+            <table id="poupancaTabela">
+                <thead>
+                    <tr>
+                        <th>Valor Objetivo</th>
+                        <th>Prazo (meses)</th>
+                        <th>Valor Mensal Necessário</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </main>        
+        <script>
+            //calculo para juntar
+            document.addEventListener('DOMContentLoaded', function() {
+                const tabelaPoupanca = document.getElementById('poupancaTabela');
+                if (!tabelaPoupanca) {
+                    console.error('Tabela de Poupança não encontrada!');
+                    return;
+                }
+                const tbodyPoupanca = tabelaPoupanca.getElementsByTagName('tbody')[0];
+                const poupancas = JSON.parse(localStorage.getItem('poupancas')) || [];
+                poupancas.forEach(poupanca => adicionarTabelaPoupanca(poupanca));
+
+                document.getElementById('calcularPoupanca').addEventListener('click', function() {
+                    const valorObjetivo = parseFloat(document.getElementById('valorObjetivo').value);
+                    const prazo = parseInt(document.getElementById('prazo').value);
+
+                    if (isNaN(valorObjetivo) || isNaN(prazo) || prazo <= 0) {
+                        alert('Por favor, insira valores válidos.');
+                        return;
+                    }
+
+                    const valorMensalPoupanca = (valorObjetivo / prazo).toFixed(2);
+                    document.getElementById('resultado').innerText = `Você precisa poupar R$ ${valorMensalPoupanca} por mês.`;
+
+                    const novaPoupanca = { valorObjetivo: valorObjetivo.toFixed(2), prazo, valorMensal: valorMensalPoupanca };
+
+                    adicionarTabelaPoupanca(novaPoupanca);
+                    poupancas.push(novaPoupanca);
+                    localStorage.setItem('poupancas', JSON.stringify(poupancas));
+                });
+
+                function adicionarTabelaPoupanca(poupanca) {
+                    const newRow = tbodyPoupanca.insertRow();
+                    newRow.innerHTML = `
+                        <td>${poupanca.valorObjetivo}</td>
+                        <td>${poupanca.prazo}</td>
+                        <td>${poupanca.valorMensal}</td>`;
+                }
+            });
+        </script>
+    </body>
+</html>
